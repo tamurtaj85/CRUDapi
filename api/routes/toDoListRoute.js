@@ -1,7 +1,5 @@
 'use strict';
 
-// import toDoList from '../controllers/toDoListController.js';
-
 module.exports = function module(app) {
     
   const toDoList = require('../controllers/toDoListController');
