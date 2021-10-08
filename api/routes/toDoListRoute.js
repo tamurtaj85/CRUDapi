@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function module(app) {
+module.exports (app => {
     
   const toDoList = require('../controllers/toDoListController');
 
@@ -13,5 +13,4 @@ module.exports = function module(app) {
     .get(toDoList.readTask)
     .put(toDoList.updateTask)
     .delete(toDoList.deleteTask);
-};
-
+});
