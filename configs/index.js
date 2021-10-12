@@ -1,2 +1,2 @@
-require('./configs/mongooes');
-require('./configs/express');
+require('./mongooes');
+require('./express');
