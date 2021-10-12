@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-require('../api/routes/');
+require('../api/routes');
 
 app.listen(port);
 
