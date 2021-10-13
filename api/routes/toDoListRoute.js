@@ -1,7 +1,7 @@
 "use strict";
 
 export async function routes_ToDoList(app) {
-  const toDoList = await import("../controllers/toDoListController.js");
+  const { toDoList } = await import("../controllers/index.js");
 
   // todoList Routes
   app.route("/tasks").get(toDoList.listAllTasks).post(toDoList.createTask);

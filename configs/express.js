@@ -1,17 +1,18 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { routes_ToDoList } from "../api/routes/index.js";
+import { config } from "./configs.js";
+import { routes_ToDoList, routes_user } from "../api/routes/index.js";
 import { notFound } from "../middleWare/middleware.js";
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-routes_ToDoList(app);
+await routes_ToDoList(app);
+await routes_user(app);
 
-app.listen(port);
+app.listen(config.port);
 
 app.use(notFound);
 

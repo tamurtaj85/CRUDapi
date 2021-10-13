@@ -1,5 +1,9 @@
-'use strict'
+"use strict";
 
-module.exports = (app) =>{
-    
+export async function routes_user(app) {
+  const { userControl } = await import("../controllers/index.js");
+
+  app.route("/me").get(userControl.showUserInfo);
+
+  app.route("/update_me").post(await userControl.upadteUserInfo);
 }

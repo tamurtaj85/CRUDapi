@@ -1,8 +1,6 @@
 "use strict";
 
-import mongoose from "mongoose";
-
-const task = mongoose.model("Tasks");
+import { task } from "../models/index.js";
 
 const listAllTasks = function (req, res) {
   task.find({}, function (err, task) {
@@ -43,7 +41,7 @@ const updateTask = function (req, res) {
 };
 
 const deleteTask = function (req, res) {
-  task.remove(
+  task.deleteOne(
     {
       _id: req.params.taskId,
     },
