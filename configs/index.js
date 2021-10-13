@@ -1,2 +1,2 @@
-require('./mongooes');
-require('./express');
+await import("./mongooes.js");
+await import("./express.js");

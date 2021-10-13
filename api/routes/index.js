@@ -1,2 +1,1 @@
-const routes = require("./toDoListRoute"); //importing route
-module.exports = routes;
+export const {routes_ToDoList} = await import("./toDoListRoute.js"); //importing route

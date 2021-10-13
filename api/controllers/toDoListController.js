@@ -1,10 +1,10 @@
 "use strict";
 
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const task = mongoose.model("Tasks");
 
-exports.listAllTasks = function (req, res) {
+const listAllTasks = function (req, res) {
   task.find({}, function (err, task) {
     if (err) res.send(err);
 
@@ -12,7 +12,7 @@ exports.listAllTasks = function (req, res) {
   });
 };
 
-exports.createTask = function (req, res) {
+const createTask = function (req, res) {
   var new_task = new task(req.body);
 
   new_task.save(function (err, task) {
@@ -22,7 +22,7 @@ exports.createTask = function (req, res) {
   });
 };
 
-exports.readTask = function (req, res) {
+const readTask = function (req, res) {
   task.findById(req.params.taskId, function (err, task) {
     if (err) res.send(err);
 
@@ -30,7 +30,7 @@ exports.readTask = function (req, res) {
   });
 };
 
-exports.updateTask = function (req, res) {
+const updateTask = function (req, res) {
   task.findOneAndUpdate(
     { _id: req.params.taskId },
     req.body,
@@ -42,7 +42,7 @@ exports.updateTask = function (req, res) {
   );
 };
 
-exports.deleteTask = function (req, res) {
+const deleteTask = function (req, res) {
   task.remove(
     {
       _id: req.params.taskId,
@@ -53,3 +53,5 @@ exports.deleteTask = function (req, res) {
     }
   );
 };
+
+export { listAllTasks, createTask, readTask, updateTask, deleteTask };

@@ -1,1 +1,1 @@
-require('./configs/index.js')
+await import("./configs/index.js");

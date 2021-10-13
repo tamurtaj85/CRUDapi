@@ -1,7 +1,7 @@
 "use strict";
 
-module.exports = (app) => {
-  const toDoList = require("../controllers/toDoListController");
+export async function routes_ToDoList(app) {
+  const toDoList = await import("../controllers/toDoListController.js");
 
   // todoList Routes
   app.route("/tasks").get(toDoList.listAllTasks).post(toDoList.createTask);
@@ -11,4 +11,4 @@ module.exports = (app) => {
     .get(toDoList.readTask)
     .put(toDoList.updateTask)
     .delete(toDoList.deleteTask);
-};
+}

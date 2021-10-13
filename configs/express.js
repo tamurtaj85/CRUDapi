@@ -1,5 +1,7 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+import express from "express";
+import bodyParser from "body-parser";
+import { routes_ToDoList } from "../api/routes/index.js";
+import { notFound } from "../middleWare/middleware.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -7,12 +9,10 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const routes = require("../api/routes");
-routes(app);
+routes_ToDoList(app);
 
 app.listen(port);
 
-const middleWare = require("../middleWare/middleware");
-app.use(middleWare.notFound);
+app.use(notFound);
 
 console.log("todo list RESTful API server started on: " + port);
