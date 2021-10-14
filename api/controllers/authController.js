@@ -1,5 +1,5 @@
-import { config } from "./configs.js";
-import User from "../api/models/userModel.js";
+import { config } from "../../configs/configs.js";
+import { User } from "../models/index.js";
 import jwt from "jsonwebtoken";
 
 export function newToken(user) {
@@ -21,12 +21,13 @@ export async function signup(req, res) {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: "need email and password" });
   }
-
+  
   try {
     const user = await User.create(req.body);
     const token = newToken(user);
     return res.status(201).send({ token });
   } catch (e) {
+    // console.error(e.message);
     return res.status(500).end();
   }
 }
@@ -59,32 +60,4 @@ export async function signin(req, res) {
     console.error(e);
     res.status(500).end();
   }
-}
-
-export async function protect(req, res, next) {
-  const bearer = req.headers.authorization;
-
-  if (!bearer || !bearer.startsWith("Bearer ")) {
-    return res.status(401).end();
-  }
-
-  const token = bearer.split("Bearer ")[1].trim();
-  let payload;
-  try {
-    payload = await verifyToken(token);
-  } catch (e) {
-    return res.status(401).end();
-  }
-
-  const user = await User.findById(payload.id)
-    .select("-password")
-    .lean()
-    .exec();
-
-  if (!user) {
-    return res.status(401).end();
-  }
-
-  req.user = user;
-  next();
 }

@@ -1,35 +1,35 @@
 "use strict";
 
-import { task } from "../models/index.js";
+import { Tasks } from "../models/index.js";
 
-const listAllTasks = function (req, res) {
-  task.find({}, function (err, task) {
+function listAllTasks(req, res) {
+  Tasks.find({}, function (err, task) {
     if (err) res.send(err);
 
     res.json(task);
   });
-};
+}
 
-const createTask = function (req, res) {
-  var new_task = new task(req.body);
+function createTask(req, res) {
+  var new_task = new Tasks(req.body);
 
   new_task.save(function (err, task) {
     if (err) res.send(err);
 
     res.json(task);
   });
-};
+}
 
-const readTask = function (req, res) {
-  task.findById(req.params.taskId, function (err, task) {
+function readTask(req, res) {
+  Tasks.findById(req.params.taskId, function (err, task) {
     if (err) res.send(err);
 
     res.json(task);
   });
-};
+}
 
-const updateTask = function (req, res) {
-  task.findOneAndUpdate(
+function updateTask(req, res) {
+  Tasks.findOneAndUpdate(
     { _id: req.params.taskId },
     req.body,
     { new: true },
@@ -38,10 +38,10 @@ const updateTask = function (req, res) {
       res.json(task);
     }
   );
-};
+}
 
-const deleteTask = function (req, res) {
-  task.deleteOne(
+function deleteTask(req, res) {
+  Tasks.deleteOne(
     {
       _id: req.params.taskId,
     },
@@ -50,6 +50,6 @@ const deleteTask = function (req, res) {
       res.json({ message: "Task successfully deleted" });
     }
   );
-};
+}
 
 export { listAllTasks, createTask, readTask, updateTask, deleteTask };

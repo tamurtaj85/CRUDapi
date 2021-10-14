@@ -1,4 +1,4 @@
-import { user } from "../models/index.js";
+import { User } from "../models/index.js";
 
 export function showUserInfo(req, res) {
   res.status(200).json({ data: req.user });
@@ -6,7 +6,7 @@ export function showUserInfo(req, res) {
 
 export async function upadteUserInfo(req, res) {
   try {
-    const userCurrent = await user
+    const userCurrent = await User
       .findByIdAndUpdate(req.user._id, req.body, {
         new: true,
       })

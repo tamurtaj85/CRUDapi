@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 const userSchema = new mongooes.Schema({
   firstName: {
     type: String,
-    required: true,
+    required: 'Cannot leave first name blank while signing up.',
     trim: true,
   },
 
@@ -17,14 +17,14 @@ const userSchema = new mongooes.Schema({
 
   email: {
     type: String,
-    required: true,
+    required: 'Cannot leave email blank while signing up.',
     unique: true,
     trim: true,
   },
 
   password: {
     type: String,
-    required: true,
+    required: 'Cannot leave password blank while signing up.',
     trim: true,
   },
 });
@@ -46,7 +46,7 @@ userSchema.pre("save", function (next) {
 
 userSchema.methods.checkPassword = function (password) {
   const passwordHash = this.password;
-  
+
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, passwordHash, (err, same) => {
       if (err) {
@@ -58,4 +58,4 @@ userSchema.methods.checkPassword = function (password) {
   });
 };
 
-export default mongooes.model("User", userSchema);
+export const User = mongooes.model("User", userSchema);
