@@ -1,37 +1,39 @@
 "use strict";
 
-const mongoose = require("mongoose");
+import { Tasks } from "../models/index.js";
+import { paginationResponse } from "../utils/pagination.js";
 
-const task = mongoose.model("Tasks");
+function listAllTasks(req, res) {
+  console.log(paginationResponse);
+  
+  // Tasks.find({}, function (err, task) {
+  //   if (err) res.send(err);
 
-exports.listAllTasks = function (req, res) {
-  task.find({}, function (err, task) {
-    if (err) res.send(err);
+  //   res.json(task);
+  // });
+  res.json(paginationResponse.docs);
+}
 
-    res.json(task);
-  });
-};
-
-exports.createTask = function (req, res) {
-  var new_task = new task(req.body);
+function createTask(req, res) {
+  var new_task = new Tasks(req.body);
 
   new_task.save(function (err, task) {
     if (err) res.send(err);
 
     res.json(task);
   });
-};
+}
 
-exports.readTask = function (req, res) {
-  task.findById(req.params.taskId, function (err, task) {
+function readTask(req, res) {
+  Tasks.findById(req.params.taskId, function (err, task) {
     if (err) res.send(err);
 
     res.json(task);
   });
-};
+}
 
-exports.updateTask = function (req, res) {
-  task.findOneAndUpdate(
+function updateTask(req, res) {
+  Tasks.findOneAndUpdate(
     { _id: req.params.taskId },
     req.body,
     { new: true },
@@ -40,10 +42,10 @@ exports.updateTask = function (req, res) {
       res.json(task);
     }
   );
-};
+}
 
-exports.deleteTask = function (req, res) {
-  task.remove(
+function deleteTask(req, res) {
+  Tasks.deleteOne(
     {
       _id: req.params.taskId,
     },
@@ -52,4 +54,6 @@ exports.deleteTask = function (req, res) {
       res.json({ message: "Task successfully deleted" });
     }
   );
-};
+}
+
+export { listAllTasks, createTask, readTask, updateTask, deleteTask };
