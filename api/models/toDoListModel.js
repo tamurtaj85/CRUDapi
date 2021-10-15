@@ -1,6 +1,7 @@
 "use strict";
 
 import mongoose from "mongoose";
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const taskSchema = new mongoose.Schema({
   name: {
@@ -23,5 +24,7 @@ const taskSchema = new mongoose.Schema({
     default: ["pending"],
   },
 });
+
+taskSchema.plugin(mongoosePaginate);
 
 export const Tasks = mongoose.model("Tasks", taskSchema);

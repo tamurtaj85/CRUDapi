@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { config } from "./configs.js";
-import { routes_ToDoList, routes_User, routes_Auth } from "../api/routes/index.js";
+import { routes_ToDoList, routes_User, routes_Auth } from "../routes/index.js";
 import { notFound, protect } from "../middleWare/middleware.js";
 
 const app = express();

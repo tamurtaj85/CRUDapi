@@ -1,5 +1,5 @@
-import { User } from "../api/models/index.js";
-import { authControl } from "../api/controllers/index.js";
+import { User } from "../models/index.js";
+import { authControl } from "../controllers/index.js";
 
 export function notFound(req, res){
   res.status(404).send({ url: req.originalUrl + " not found" });

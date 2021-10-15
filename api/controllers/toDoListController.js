@@ -1,13 +1,17 @@
 "use strict";
 
 import { Tasks } from "../models/index.js";
+import { paginationResponse } from "../utils/pagination.js";
 
 function listAllTasks(req, res) {
-  Tasks.find({}, function (err, task) {
-    if (err) res.send(err);
+  console.log(paginationResponse);
+  
+  // Tasks.find({}, function (err, task) {
+  //   if (err) res.send(err);
 
-    res.json(task);
-  });
+  //   res.json(task);
+  // });
+  res.json(paginationResponse.docs);
 }
 
 function createTask(req, res) {

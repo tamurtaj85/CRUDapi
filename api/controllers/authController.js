@@ -1,4 +1,4 @@
-import { config } from "../../configs/configs.js";
+import { config } from "../configs/configs.js";
 import { User } from "../models/index.js";
 import jwt from "jsonwebtoken";
 

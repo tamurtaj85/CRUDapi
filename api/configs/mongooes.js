@@ -5,4 +5,4 @@ import { config } from "./configs.js";
 mongoose.Promise = global.Promise;
 mongoose.connect(config.dbUrl);
 
-await import("../api/models/index.js"); // Loading all the residing models from [model/index.js]
+await import("../models/index.js"); // Loading all the residing models from [model/index.js]
